@@ -44,7 +44,7 @@ Most of these you wont need and I highlighted the ones essential to the db2 data
     && dpkg -i libssl1.0.0.deb \
     && rm libssl1.0.0.deb \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ 
+    && rm -rf /var/lib/apt/lists/ *
     
 #copy the setup script, run it, then delete it
 My setup R file is in the src folder this dockerfile is in and I run it then delete it after I run it, it mainly installs the r-packages I need (I have warn=-2) so the build fails if a package doesnt install correctly.
@@ -57,7 +57,7 @@ Here is where I copy the rest of the r files in the src folder.
 *COPY src /src
 
 #db2 drivers
-I have the db2jcc4.jar file in my folder as well which I got from the ibm website, i.e. https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads
+I have the db2jcc4.jar file in my folder as well which I got from the ibm website, i.e. [db2jcc drivers](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads)
 
 *COPY db2jcc4.jar /opt/ibm/dsdriver/java/db2jcc4.jar
 
@@ -107,7 +107,7 @@ After you have your images in the registry, use the deployment and service-nodep
 
 Now, you should be able to make a plumber api, house it in docker, put it on the cloud, and connect to a db2 database all at the same time.
 
-I had alot of help from looking at mainly two "areas", https://code.markedmondson.me/r-on-kubernetes-serverless-shiny-r-apis-and-scheduled-scripts/ and https://github.com/holken1/deploying-r-on-cloud. With the latter being a HUGE help with the connecting the app to kubernetes. 
+I had alot of help from looking at mainly two "areas", [Marc Mondson](https://code.markedmondson.me/r-on-kubernetes-serverless-shiny-r-apis-and-scheduled-scripts/) and [Most Useful](https://github.com/holken1/deploying-r-on-cloud). With the latter being a HUGE help in connecting the app to kubernetes. 
 
 ### The end
 
