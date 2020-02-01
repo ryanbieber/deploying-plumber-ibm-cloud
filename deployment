@@ -1,0 +1,14 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: trello-pipeline-r
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: trello-pipeline
+    spec:
+      containers:
+      - name: trello-pipeline
+        image: us.icr.io/pro-pipeline/trello-pipeline-r:latest
