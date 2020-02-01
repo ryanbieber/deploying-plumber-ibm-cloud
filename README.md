@@ -51,16 +51,12 @@ Most of these you wont need and I highlighted the ones essential to the db2 data
 #copy the setup script, run it, then delete it
 My setup R file is in the src folder this dockerfile is in and I run it then delete it after I run it, it mainly installs the r-packages I need (I have warn=-2) so the build fails if a package doesnt install correctly.
 >COPY src/setup.R /
-RUN Rscript setup.R && rm setup.R
+>RUN Rscript setup.R && rm setup.R
 
-
-#copy all the other R files.
 Here is where I copy the rest of the r files in the src folder.
 >COPY src /src
 
-#db2 drivers
 I have the db2jcc4.jar file in my folder as well which I got from the ibm website, i.e. [db2jcc drivers](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads)
-
 >COPY db2jcc4.jar /opt/ibm/dsdriver/java/db2jcc4.jar
 
 Expose port 80 since that is what plumber is running on and listening too
