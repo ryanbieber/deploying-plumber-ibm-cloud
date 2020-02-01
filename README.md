@@ -10,10 +10,11 @@ I am assuming you have done all the background work in downloading docker, ibm c
 ## Dockerfile explanation
 This is the image we are going base our program off of not the trestletech one as I had problems with that one for the db2 connection.
 
-*FROM rocker/r-ver:3.6.0*
+>FROM rocker/r-ver:3.6.0
 
 Most of these you wont need and I highlighted the ones essential to the db2 database connection using the RJDBC package
-RUN apt-get update \
+
+>RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     file \
     libcurl4-openssl-dev \
@@ -49,25 +50,25 @@ RUN apt-get update \
     
 #copy the setup script, run it, then delete it
 My setup R file is in the src folder this dockerfile is in and I run it then delete it after I run it, it mainly installs the r-packages I need (I have warn=-2) so the build fails if a package doesnt install correctly.
-*COPY src/setup.R /
+>COPY src/setup.R /
 RUN Rscript setup.R && rm setup.R
 
 
 #copy all the other R files.
 Here is where I copy the rest of the r files in the src folder.
-*COPY src /src
+>COPY src /src
 
 #db2 drivers
 I have the db2jcc4.jar file in my folder as well which I got from the ibm website, i.e. [db2jcc drivers](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads)
 
-*COPY db2jcc4.jar /opt/ibm/dsdriver/java/db2jcc4.jar
+>COPY db2jcc4.jar /opt/ibm/dsdriver/java/db2jcc4.jar
 
 Expose port 80 since that is what plumber is running on and listening too
-*EXPOSE 80
+>EXPOSE 80
 
 Set my Workdir and entrypoint
-*WORKDIR /src
-ENTRYPOINT ["Rscript","main.R"]
+>WORKDIR /src
+>ENTRYPOINT ["Rscript","main.R"]
 
 This could probably get cleaned up a bit as some of those packages I install in the initial apt-get aren't used anymore, feel free to trim it down if needed. The image ends up being around 500mb if I remember correctly so it isnt very big.
 
