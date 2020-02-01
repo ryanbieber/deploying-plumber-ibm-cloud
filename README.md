@@ -70,7 +70,7 @@ Set my Workdir and entrypoint
 This could probably get cleaned up a bit as some of those packages I install in the initial apt-get aren't used anymore, feel free to trim it down if needed. The image ends up being around 500mb if I remember correctly so it isnt very big.
 
 ### these packages are essential for db2 connection
-r-cran-rjava \
+>r-cran-rjava \
 default-jdk \
 default-jre \
 libbz2-dev \
@@ -89,7 +89,7 @@ The problem with connecting to db2s from a docker container is that the document
 ## Steps
 In your R program make sure you initilize these parameters,
 
-jcc <- RJDBC::JDBC(driverClass = "com.ibm.db2.jcc.DB2Driver", classPath = "/opt/ibm/dsdriver/java/db2jcc4.jar")
+>jcc <- RJDBC::JDBC(driverClass = "com.ibm.db2.jcc.DB2Driver", classPath = "/opt/ibm/dsdriver/java/db2jcc4.jar")
 urljdbc <- "JDBCURL"
 databaseUsername <- "bluadmin"
 databasePassword <- "PASSWORD"
