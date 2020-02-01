@@ -9,10 +9,11 @@ I am assuming you have done all the background work in downloading docker, ibm c
 
 ## Dockerfile explanation
 This is the image we are going base our program off of not the trestletech one as I had problems with that one for the db2 connection.
-*FROM rocker/r-ver:3.6.0
+
+*FROM rocker/r-ver:3.6.0*
 
 Most of these you wont need and I highlighted the ones essential to the db2 database connection using the RJDBC package
-*RUN apt-get update \
+RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     file \
     libcurl4-openssl-dev \
@@ -44,7 +45,7 @@ Most of these you wont need and I highlighted the ones essential to the db2 data
     && dpkg -i libssl1.0.0.deb \
     && rm libssl1.0.0.deb \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ *
+    && rm -rf /var/lib/apt/lists/
     
 #copy the setup script, run it, then delete it
 My setup R file is in the src folder this dockerfile is in and I run it then delete it after I run it, it mainly installs the r-packages I need (I have warn=-2) so the build fails if a package doesnt install correctly.
