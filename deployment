@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: trello-pipeline
-        image: us.icr.io/pro-pipeline/trello-pipeline-r:latest
+        image: us.icr.io/<image location in container registry>
