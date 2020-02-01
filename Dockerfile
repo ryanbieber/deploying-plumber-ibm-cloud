@@ -1,6 +1,6 @@
 FROM rocker/r-ver:3.6.0
 
-# update some packages, including sodium and apache2, then clean
+# update some packages then clean
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     file \
@@ -22,7 +22,6 @@ RUN apt-get update \
 	libxrender1 \
 	bzip2 \
 	libsodium-dev \
-    apache2 \
     zlib1g-dev \
     r-cran-rjava \
     default-jdk \
@@ -39,12 +38,12 @@ RUN apt-get update \
 
 
 # copy the setup script, run it, then delete it
-COPY src/setup.R /
-RUN Rscript setup.R && rm setup.R
+# COPY src/setup.R /
+# RUN Rscript setup.R && rm setup.R
 
 
 # copy all the other R files.
-COPY src /src
+# COPY src /src
 
 # db2 drivers
 COPY db2jcc4.jar /opt/ibm/dsdriver/java/db2jcc4.jar
